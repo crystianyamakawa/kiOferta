@@ -1,0 +1,2 @@
+rootProject.name='KiOferta'
+include ':app'

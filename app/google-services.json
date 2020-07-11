@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "299018067928",
+    "firebase_url": "https://kioferta-f8863.firebaseio.com",
+    "project_id": "kioferta-f8863",
+    "storage_bucket": "kioferta-f8863.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299018067928:android:0d6e669b9bc6b53f691cad",
+        "android_client_info": {
+          "package_name": "com.kioferta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299018067928-bp2ugbfoaurnv0gkci2mrhla649450v7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kioferta",
+            "certificate_hash": "c5af3185efbb4ba6f7b9bd6a21f9fc397bf05ee3"
+          }
+        },
+        {
+          "client_id": "299018067928-76gvbgugoa0cep590jqn3tljfdg6p6pi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnGVZQusRNIr-dfsvUudfSuqIYGaqoOls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299018067928-76gvbgugoa0cep590jqn3tljfdg6p6pi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
