@@ -10,7 +10,6 @@
         android:id="@+id/layoutCabecalho"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
         android:addStatesFromChildren="true"
         android:background="#E401298C"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,18 +18,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/btNovoUser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#E401298C"
+            android:onClick="carregaNovoUsuario"
+            android:tint="@color/colorDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btNovoUser2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_anunciante" />
+
+        <ImageButton
             android:id="@+id/btNovoUser2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="#BBDEFB"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="#E401298C"
             android:onClick="carregaFornecedor"
+            android:tint="@color/colorDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.333"
-            app:srcCompat="@drawable/ic_supervisor" />
+            app:srcCompat="@drawable/ic_add" />
 
         <TextView
             android:id="@+id/textView2"
@@ -44,27 +57,39 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.526" />
+            app:layout_constraintVertical_bias="0.47000003" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutDestaque"
-        android:layout_width="414dp"
-        android:layout_height="95dp"
+        android:layout_width="0dp"
+        android:layout_height="79dp"
         android:background="#BBDEFB"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutCabecalho">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/storyGuguy"
+            android:layout_width="112dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:background="#BBDEFB"
+            android:onClick="carregaStories"
+            app:layout_constraintStart_toEndOf="@+id/storyMuffato"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/guguy" />
+
+        <ImageView
+            android:id="@+id/storyMuffato"
             android:layout_width="92dp"
             android:layout_height="46dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:background="#BBDEFB"
             android:onClick="carregaStories"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,91 +97,49 @@
             app:srcCompat="@drawable/muffato" />
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="112dp"
-            android:layout_height="59dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="20dp"
-            android:background="#BBDEFB"
-            android:onClick="carregaStories"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/guguy" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="137dp"
-            android:layout_height="44dp"
+            android:id="@+id/storyCancao"
+            android:layout_width="107dp"
+            android:layout_height="54dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="#BBDEFB"
             android:onClick="carregaStories"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.36"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintStart_toEndOf="@+id/storyGuguy"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cancao" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutRodape"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="4dp"
-        android:background="#BBDEFB"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/btHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="132dp"
-            android:layout_marginRight="132dp"
-            android:background="#BBDEFB"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btNovoUser"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_home_24px" />
-
-        <ImageButton
-            android:id="@+id/btSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#BBDEFB"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btHome"
-            app:layout_constraintHorizontal_bias="0.251"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_search" />
-
-        <ImageButton
-            android:id="@+id/btNovoUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
-            android:background="#BBDEFB"
-            android:onClick="carregaNovoUsuario"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_anunciante" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
         android:id="@+id/listOfertas"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:background="#BBDEFB"
-        app:layout_constraintBottom_toTopOf="@+id/layoutRodape"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutDestaque" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="0dp"
+        android:layout_height="74dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:foregroundGravity="center"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

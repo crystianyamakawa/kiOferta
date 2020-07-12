@@ -9,15 +9,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
         <TextView
             android:id="@+id/txTituloOferta"
-            android:layout_width="392dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:autoText="false"
             android:background="@color/colorBackground"
             android:inputType="textPersonName"
@@ -34,10 +35,11 @@
             android:id="@+id/txDescricao"
             android:layout_width="243dp"
             android:layout_height="118dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:text="Descricao"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.36"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imagem"
             app:layout_constraintTop_toBottomOf="@+id/txTituloOferta" />
 
@@ -45,12 +47,9 @@
             android:id="@+id/imagem"
             android:layout_width="146dp"
             android:layout_height="118dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txTituloOferta"
-            app:srcCompat="@drawable/alface" />
+            app:layout_constraintTop_toBottomOf="@+id/txTituloOferta" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

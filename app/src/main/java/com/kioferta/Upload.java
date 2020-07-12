@@ -1,8 +1,8 @@
 package com.kioferta;
 
 public class Upload {
-    private String mName;
-    private String mImageUrl;
+    private String Name;
+    private String ImageUrl;
 
     public Upload(){
 
@@ -12,23 +12,23 @@ public class Upload {
         if(name.trim().equals("")){
             name = "Sem Nome";
         }
-        mName = name;
-        mImageUrl = imageUrl;
+        Name = name;
+        ImageUrl = imageUrl;
     }
 
-    public String getmName() {
-        return mName;
+    public String getName() {
+        return Name;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setName(String mName) {
+        this.Name = mName;
     }
 
-    public String getmImageUrl() {
-        return mImageUrl;
+    public String getImageUrl() {
+        return ImageUrl;
     }
 
-    public void setmImageUrl(String mImageUrl) {
-        this.mImageUrl = mImageUrl;
+    public void setImageUrl(String mImageUrl) {
+        this.ImageUrl = mImageUrl;
     }
 }

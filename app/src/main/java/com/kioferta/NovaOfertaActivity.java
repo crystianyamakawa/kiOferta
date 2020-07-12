@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +40,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.kioferta.model.Oferta;
 
@@ -49,6 +51,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class NovaOfertaActivity extends AppCompatActivity {
 
@@ -60,18 +63,24 @@ public class NovaOfertaActivity extends AppCompatActivity {
     private Oferta novaOferta = new Oferta();
     ImageView imageView1 ;
     private DatabaseReference databaseReference;
+    private DatabaseReference databaseUploads;
     private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
     Uri  mImageUri;
     ProgressBar mProgressBar;
+    InterstitialAd mInterstitialAd;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_oferta);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        mStorageRef = FirebaseStorage.getInstance().getReference("ofertas");
+        databaseReference = FirebaseDatabase.getInstance().getReference("ofertas");
+        databaseUploads = FirebaseDatabase.getInstance().getReference("uploads");
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+
 
     }
 
@@ -208,10 +217,15 @@ public class NovaOfertaActivity extends AppCompatActivity {
         novaOferta.setChave(chave);
         databaseReference.child(novaOferta.getChave().toString()).setValue(novaOferta);
 
-        carregaArquivoStorage();
+        if (mUploadTask !=null && mUploadTask.isInProgress()){
+            Toast.makeText(this, "Tarefa de Carregamento de arquivo em executção, por favor aguarde!!", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(this, "A sua oferta foi armazenada com sucesso!!", Toast.LENGTH_LONG).show();
-        finish();
+        }else {
+            carregaArquivoStorage();
+            Toast.makeText(this, "A sua oferta foi armazenada com sucesso!!", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
     }
 
     private String getFileExtension(Uri uri){
@@ -222,10 +236,9 @@ public class NovaOfertaActivity extends AppCompatActivity {
 
     private void carregaArquivoStorage(){
         if (mImageUri !=null) {
-            StorageReference fileReference = mStorageRef.child(novaOferta.getChave()
-             + "." + getFileExtension(mImageUri));
+            StorageReference fileReference = mStorageRef.child(novaOferta.getChave());
 
-            fileReference.putFile(mImageUri)
+            mUploadTask = fileReference.putFile(mImageUri)
             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -238,8 +251,8 @@ public class NovaOfertaActivity extends AppCompatActivity {
                     }, 5000);
                     Toast.makeText(NovaOfertaActivity.this,"Upload realizado com sucesso",Toast.LENGTH_SHORT).show();
                     Upload upload = new Upload(novaOferta.getChave(),mStorageRef.getDownloadUrl().toString());
-                    String uploadid = databaseReference.push().getKey();
-                    databaseReference.child(uploadid).setValue(upload);
+                    String uploadid = databaseUploads.push().getKey();
+                    databaseUploads.child(uploadid).setValue(upload);
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
@@ -260,5 +273,7 @@ public class NovaOfertaActivity extends AppCompatActivity {
             Toast.makeText(this,"Arquivo nao selecionado", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
 
