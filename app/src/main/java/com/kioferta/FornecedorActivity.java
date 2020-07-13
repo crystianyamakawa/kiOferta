@@ -23,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -44,20 +45,23 @@ public class FornecedorActivity<MapController> extends AppCompatActivity impleme
     private GoogleMap gmap;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     Double latitude, longitude;
-
+    Integer carregarMap = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fornecedor);
-        mapView = findViewById(R.id.mapView);
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
-        }
-
-        mapView.onCreate(mapViewBundle);
+//        mapView = findViewById(R.id.mapView);
+//        Bundle mapViewBundle = null;
+//        if (savedInstanceState != null) {
+//            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+//        }
+//
+//        mapView.onCreate(mapViewBundle);
+        SupportMapFragment mapView = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
         mapView.getMapAsync(this);
+
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -131,7 +135,7 @@ public class FornecedorActivity<MapController> extends AppCompatActivity impleme
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     ativaServicoGPS();
                 } else {
-                    Toast.makeText(this, "Não vai funcionar!!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Sem Permissão GPS!!!", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -143,16 +147,20 @@ public class FornecedorActivity<MapController> extends AppCompatActivity impleme
 
             LocationListener locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
-                    Location minhaLocalizacao = location;
-                    //gmap.po
-                    latitude = minhaLocalizacao.getLatitude();
-                    longitude = minhaLocalizacao.getLongitude();
-                    LatLng ny = new LatLng(latitude, longitude);
-                    gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(ny);
-                    gmap.addMarker(markerOptions);
-                    Log.d("GSP","Position " +location.toString());
+
+                    if (carregarMap ==1) {
+                        gmap.clear();
+                        Location minhaLocalizacao = location;
+                        latitude = minhaLocalizacao.getLatitude();
+                        longitude = minhaLocalizacao.getLongitude();
+                        LatLng ponto = new LatLng(latitude, longitude);
+                        gmap.addMarker(new MarkerOptions().position(ponto).title("Nova Localização!"));
+                        gmap.moveCamera(CameraUpdateFactory.newLatLng(ponto));
+
+                        carregarMap = 0;
+
+                    }
+
                 }
 
                 public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -177,11 +185,11 @@ public class FornecedorActivity<MapController> extends AppCompatActivity impleme
         gmap = googleMap;
         latitude = -23.090995;
         longitude = -52.474570;
-        LatLng ny = new LatLng(latitude, longitude);
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(ny);
-        gmap.addMarker(markerOptions);
+        LatLng ponto = new LatLng(latitude, longitude);
+        gmap.addMarker(new MarkerOptions().position(ponto).title("Localização Atual!"));
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(ponto));
+        carregarMap = 1;
+
 
     }
 
